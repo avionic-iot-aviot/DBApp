@@ -6,7 +6,7 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: "~/mydb.sqlite"
+      filename: "/db/mydb.sqlite"
     },
     useNullAsDefault: true
   },
@@ -14,7 +14,7 @@ module.exports = {
   staging: {
     client: 'sqlite3',
     connection: {
-      filename: "~/mydb.sqlite"
+      filename: "/db/mydb.sqlite"
     },
     useNullAsDefault: true
   },
@@ -22,7 +22,7 @@ module.exports = {
   production: {
     client: 'sqlite3',
     connection: {
-      filename: "~/mydb.sqlite"
+      filename: "/db/mydb.sqlite"
     },
     useNullAsDefault: true
   }
