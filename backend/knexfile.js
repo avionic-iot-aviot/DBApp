@@ -4,34 +4,25 @@ const path = require("path");
 module.exports = {
 
   development: {
-    client: 'mysql',
+    client: 'sqlite3',
     connection: {
-      host: config.general.ipIpDb,
-      user: 'aviotuser',
-      password: 'CNDqbHS7P2yS',
-      database: 'Aviot'
+      filename: "~/mydb.sqlite"
     },
     useNullAsDefault: true
   },
 
   staging: {
-    client: 'mysql',
+    client: 'sqlite3',
     connection: {
-      host: config.general.ipIpDb,
-      user: 'aviotuser',
-      password: 'CNDqbHS7P2yS',
-      database: 'Aviot'
+      filename: "~/mydb.sqlite"
     },
     useNullAsDefault: true
   },
 
   production: {
-    client: 'mysql',
+    client: 'sqlite3',
     connection: {
-      host: config.general.ipIpDb,
-      user: 'aviotuser',
-      password: 'CNDqbHS7P2yS',
-      database: 'Aviot'
+      filename: "~/mydb.sqlite"
     },
     useNullAsDefault: true
   }
