@@ -18,7 +18,7 @@ RUN apk add npm
 RUN npm install npm@latest -g
 RUN node -v
 RUN apk add curl
-RUN apk add python3 #RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apk add python2 python3 #RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apk add nodejs
 RUN node -v
 RUN npm install -g typescript
@@ -32,6 +32,6 @@ COPY ["create.sql" , "/root/"]
 COPY ["deploy.sh" , "/root/"]
 
 WORKDIR /root
-#CMD ["/bin/bash", "./deploy.sh"]
-CMD ["sleep", "infinity"]
+CMD ["sh", "./deploy.sh"]
+#CMD ["sleep", "infinity"]
 
