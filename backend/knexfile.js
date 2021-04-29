@@ -16,6 +16,10 @@ module.exports = {
     connection: {
       filename: "/db/mydb.sqlite"
     },
+    migrations: {
+      tableName: 'migrations',
+      directory: path.resolve(__dirname) + '/src/db-migrations'
+    },
     useNullAsDefault: true
   },
 

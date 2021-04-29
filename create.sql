@@ -3,6 +3,6 @@ CREATE TABLE `Devices` (
     `Mac` varchar(30) NOT NULL,
     `Default_Name` varchar(50) NOT NULL,
     `Current_Name` varchar(50) NOT NULL,
-    `Created_at` varchar(20) NOT NULL,
-    `Updated_at` varchar(20) NOT NULL
+    `Created_at` TIMESTAMP NOT NULL DEFAULT NOW(),
+    `Updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
 );
