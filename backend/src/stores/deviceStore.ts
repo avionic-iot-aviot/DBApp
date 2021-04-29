@@ -59,6 +59,7 @@ export default class DeviceStore {
             .where({ Mac: mac
             })
             .update({Current_Name: hostName})
+            .update('updated_at', knex.fn.now())
     }
 
     //     findBy(device: IDevice): any {
