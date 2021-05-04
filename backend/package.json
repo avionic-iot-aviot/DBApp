@@ -9,7 +9,7 @@
     "get_arp_table": "node dist/shared/arpTable.js",
     "exec_pushGW": "node dist/shared/pushGW.js",
     "test": "node dist/shared/watcher.js",
-    "be:migrate:staging": "NODE_ENV=staging knex migrate:up";
+    "be:migrate:staging": "NODE_ENV=staging knex migrate:up"
   },
   "dependencies": {
     "arp-a": "^0.5.2",
