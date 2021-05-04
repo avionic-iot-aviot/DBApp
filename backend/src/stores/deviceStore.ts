@@ -9,7 +9,6 @@ export default class DeviceStore {
     constructor() { }
 
     create(device: IDevice) {
-        if(!device.current_name) device.current_name = device.default_name;
         return knex('devices').insert(device).returning('*');
     }
 

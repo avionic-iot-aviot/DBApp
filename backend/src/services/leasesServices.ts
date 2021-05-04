@@ -55,7 +55,7 @@ export default class LeasesServices {
 
     async InsertDevice(leases: ILeases) {
         let temp: IDevice
-        temp={Device_id: null, Mac: leases.mac, Default_Name: leases.host, Current_Name: leases.host}
+        temp={device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host}
         await deviceStore.create(temp)
     }
 
