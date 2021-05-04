@@ -4,14 +4,12 @@ const equal = require('deep-equal');
 const fs = require('fs');
 import { Utilities } from '../shared/utilities';
 import _ = require('lodash');
-import { random } from 'lodash';
 import { ILeases, IDevice } from "../interfaces/interfaces";
 
 import TenantStore from '../stores/tenantStore';
 const tenantStore = new TenantStore();
 
 import DeviceStore from '../stores/deviceStore';
-import { raw } from 'express';
 const deviceStore = new DeviceStore();
 
 export default class LeasesServices {
@@ -26,11 +24,11 @@ export default class LeasesServices {
 
             for (let i = 0; i < leases.length; i++) {
                 if ( await this.ExistsDevices(leases[i]) == 0 ){
-                        console.log ("elemento " + i + " non esiste")
+                        console.log ("Device " + leases[i].host + " doesn't exist")
                         await this.InsertDevice(leases[i])
-                        console.log("Elemento inserito")
+                        console.log("Inserted a new device")
                     }else{
-                        console.log ("elemento " + i + " esiste")
+                        console.log ("Device " + leases[i].host + " already exists")
                         //console.log ( await deviceStore.findByMac(leases[i].mac) )
                         //this.CheckMacDevices(leases[i])
                     }
@@ -55,8 +53,8 @@ export default class LeasesServices {
 
     async InsertDevice(leases: ILeases) {
         let temp: IDevice
-        temp={device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host}
-        await deviceStore.create(temp)
+        temp={device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host};
+        await deviceStore.create(temp);
     }
 
     // async UpdateIpDevice(dev: IDevice, newip: string) {
