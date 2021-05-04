@@ -24,10 +24,20 @@ RUN npm install knex -g
 RUN apk add sqlite
 RUN apk add openrc
 
-COPY ["create.sql" , "/root/"]
-COPY ["deploy.sh" , "/root/"]
+RUN mkdir /db
 
 WORKDIR /root
+
+RUN git clone https://github.com/avionic-iot-aviot/DBApp 
+
+WORKDIR /root/DBApp/backend
+
+RUN npm install && npm run be:build && npm run be:migrate:staging
+
+WORKDIR /root
+
+ADD deploy.sh /root/
+
+
 CMD ["sh", "./deploy.sh"]
-#CMD ["sleep", "infinity"]
 
