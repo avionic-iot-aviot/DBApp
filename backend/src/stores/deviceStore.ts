@@ -8,27 +8,27 @@ var knex = require('knex')(config[process.env.NODE_ENV]);
 export default class DeviceStore {
     constructor() { }
 
-    async create(device: IDevice) {
-        return await knex('devices').insert(device).returning('*');
+    create(device: IDevice) {
+        return knex('devices').insert(device).returning('*');
     }
 
-    async update(mac_address: string, current_name: string) {
-        return await knex('devices').where({ mac_address }).update({ current_name });
+    update(mac_address: string, current_name: string) {
+        return knex('devices').where({ mac_address }).update({ current_name });
     }
 
-    async delete(id: number) {
-        return await knex('devices').where({ id }).del();
+    delete(id: number) {
+        return knex('devices').where({ id }).del();
     }
 
-    async findById(id: number) {
-        return await knex('devices').select('*').where({ id });
+    findById(id: number): any {
+        return knex('devices').select('*').where({ id });
     }
 
-    async getAllElements() {
-        return await knex('devices').select('*');
+    getAllElements() {
+        return knex('devices').select('*');
     }
 
-    async findByMac(mac_address: string) {
-        return await knex('devices').where({ mac_address }).select('*');
+    findByMac(mac_address: string) {
+        return knex('devices').where({ mac_address }).select('*');
     }
 }
