@@ -20,6 +20,10 @@ export default class DeviceStore {
         return knex('devices').where({ id }).del();
     }
 
+    batchDelete(ids: number[]) {
+        return knex('devices').whereIn("device_id", ids).del();
+    }
+
     findById(id: number): any {
         return knex('devices').select('*').where({ id });
     }
