@@ -28,6 +28,6 @@ COPY ["create.sql" , "/root/"]
 COPY ["deploy.sh" , "/root/"]
 
 WORKDIR /root
-#CMD ["sh", "./deploy.sh"]
-CMD ["sleep", "infinity"]
+CMD ["sh", "./deploy.sh"]
+#CMD ["sleep", "infinity"]
 
