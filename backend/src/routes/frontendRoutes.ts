@@ -18,10 +18,10 @@ router.use(cors());
 router.options('*', cors());
 
 router.get('/getAllDevices', async (req, res) => {
-    const body = req.body;
+    //const body = req.body;
     var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length)-1]
     try {
-        const params = body && body.params ? body.params : null;
+        //const params = body && body.params ? body.params : null;
         console.log("frontendRoutes received("+ip+") ");
         Utilities.log("frontendRoutes received("+ip+") ");
         

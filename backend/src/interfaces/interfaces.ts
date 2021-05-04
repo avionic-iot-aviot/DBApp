@@ -22,10 +22,10 @@ export interface ITenant {
 }
 
 export interface IDevice{
-    Device_id: number;
-    Mac: string;
-    Default_Name: string;
-    Current_Name: string;
-    Created_at?: string;
-    Updated_at?: string;
+    device_id: number;
+    mac_address: string;
+    default_name: string;
+    current_name?: string;
+    created_at?: any;
+    updated_at?: any;
 }
