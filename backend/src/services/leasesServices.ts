@@ -59,7 +59,7 @@ export default class LeasesServices {
         }
     }
 
-    async git checkout .InsertDevice(leases: ILeases) {
+    async InsertDevice(leases: ILeases) {
         let temp: IDevice
         temp = { device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host };
         await deviceStore.create(temp);
