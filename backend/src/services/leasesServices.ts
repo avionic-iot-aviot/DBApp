@@ -19,42 +19,49 @@ export default class LeasesServices {
         //console.log('leasesServices received from ' + data.TenantId + ' leases: '+ this.GetLeasesFromRawData(data.leases))
 
 
-            //console.log('Ok Esiste il tenent');
-            let leases: ILeases[] = await this.RawDataToArrayLeases(data.leases)
+        //console.log('Ok Esiste il tenent');
+        const leases: ILeases[] = await this.RawDataToArrayLeases(data.leases)
+        const leases_mac = _.map(leases, (lease: any) => lease.mac);
+        const all_devices: IDevice[] = await deviceStore.getAllElements();
 
-            for (let i = 0; i < leases.length; i++) {
-                if ( await this.ExistsDevices(leases[i]) == 0 ){
-                        console.log ("Device " + leases[i].host + " doesn't exist")
-                        const result = await this.InsertDevice(leases[i]); 
-                        console.log("Create device query: ", result);
-                        console.log("Inserted a new device")
-                    }else{
-                        console.log ("Device " + leases[i].host + " already exists")
-                        //console.log ( await deviceStore.findByMac(leases[i].mac) )
-                        //this.CheckMacDevices(leases[i])
-                    }
+        // We delete from devices all the devices that don't figure in the leases.
+        const ids_to_delete: number[] = _.map(
+            _.filter(all_devices, (device: IDevice) => !_.includes(leases_mac, device.mac_address)), (device: IDevice) => device.device_id as number
+        );
+        const result_delete = await deviceStore.batchDelete(ids_to_delete);
 
-                }
-
-
+        for (let i = 0; i < leases.length; i++) {
+            if (await this.ExistsDevices(leases[i]) == 0) {
+                console.log("Device " + leases[i].host + " doesn't exist")
+                const result = await this.InsertDevice(leases[i]);
+                console.log("Create device query: ", result);
+                console.log("Inserted a new device")
+            } else {
+                console.log("Device " + leases[i].host + " already exists")
+                //console.log ( await deviceStore.findByMac(leases[i].mac) )
+                //this.CheckMacDevices(leases[i])
+            }
+        }
+        return {"data": leases, "state": "success"};
     }
 
     async RawDataToArrayLeases(raw: any) {
-        let temp: ILeases[] = raw
-        return temp
+        let temp: ILeases[] = raw;
+        return temp;
     }
 
     async ExistsDevices(leases: ILeases) {
-        if (await deviceStore.findByMac(leases.mac)) {
-            return await deviceStore.findByMac(leases.mac)
+        const device = await deviceStore.findByMac(leases.mac);
+        if (device) {
+            return device;
         } else {
             return 0
         }
     }
 
-    async InsertDevice(leases: ILeases) {
+    async git checkout .InsertDevice(leases: ILeases) {
         let temp: IDevice
-        temp={device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host};
+        temp = { device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host };
         await deviceStore.create(temp);
     }
 
