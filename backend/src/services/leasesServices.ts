@@ -10,7 +10,9 @@ import TenantStore from '../stores/tenantStore';
 const tenantStore = new TenantStore();
 
 import DeviceStore from '../stores/deviceStore';
+import FrontendServices from './frontendServices';
 const deviceStore = new DeviceStore();
+const frontendServices = new FrontendServices();
 
 export default class LeasesServices {
 
@@ -35,6 +37,7 @@ export default class LeasesServices {
                 console.log("Device " + leases[i].host + " doesn't exist")
                 const result = await this.InsertDevice(leases[i]);
                 console.log("Create device query: ", result);
+                await frontendServices.SendNewRolesAtDnsServerApp(leases[i].mac, leases[i].host);
                 console.log("Inserted a new device")
             } else {
                 console.log("Device " + leases[i].host + " already exists")
