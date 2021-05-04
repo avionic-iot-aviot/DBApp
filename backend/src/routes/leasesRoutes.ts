@@ -16,8 +16,8 @@ router.post('/refresh', async (req, res) => {
         const params = body && body.params ? body.params : null;
         console.log("leasesRoutes received("+ip+"): ","PARAMS", params);
         Utilities.log("leasesRoutes received("+ip+"): " + "PARAMS " + params);
-        await leasesService.NewLeasesReceiver(params);
-        res.status(HttpStatus.OK).send();
+        const result = await leasesService.NewLeasesReceiver(params);
+        res.status(HttpStatus.OK).send(result);
     } catch (error) {
         res.status(HttpStatus.OK).send(error);
     }

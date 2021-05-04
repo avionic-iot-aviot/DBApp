@@ -25,7 +25,8 @@ export default class LeasesServices {
             for (let i = 0; i < leases.length; i++) {
                 if ( await this.ExistsDevices(leases[i]) == 0 ){
                         console.log ("Device " + leases[i].host + " doesn't exist")
-                        await this.InsertDevice(leases[i])
+                        const result = await this.InsertDevice(leases[i]); 
+                        console.log("Create device query: ", result);
                         console.log("Inserted a new device")
                     }else{
                         console.log ("Device " + leases[i].host + " already exists")
