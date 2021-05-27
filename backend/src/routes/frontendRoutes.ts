@@ -19,14 +19,13 @@ router.options('*', cors());
 
 function mapForFrontend(data: any[]) {
     return _.map(data, (el: any) => {
-        return {
-            Device_id: el.device_id,
-            Mac: el.mac_address,
-            Default_Name: el.default_name,
-            Current_Name: el.current_name,
-            Created_at: el.created_at,
-            Updated_at: el.updated_at
-        }
+        el['Device_id'] = el.device_id;
+        el['Mac'] = el.mac_address;
+        el['Default_Name'] = el.default_name;
+        el['Current_Name'] = el.current_name;
+        el['Created_at'] = el.created_at;
+        el['Updated_at'] = el.updated_at;
+        return el;
     }
     );
 }
