@@ -26,6 +26,7 @@ export interface ITenant {
 export interface IDevice{
     device_id: number;
     mac_address: string;
+    ip: string;
     default_name: string;
     current_name?: string;
     is_static: boolean;
