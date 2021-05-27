@@ -16,6 +16,10 @@ export default class DeviceStore {
         return knex('devices').where({ mac_address }).update({ current_name });
     }
 
+    updateIP(mac_address: string, ip: string) {
+        return knex('devices').where({ mac_address }).update({ ip });
+    }
+
     delete(id: number) {
         return knex('devices').where({ id }).del();
     }

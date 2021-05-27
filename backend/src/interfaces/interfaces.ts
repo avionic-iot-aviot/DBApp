@@ -25,12 +25,12 @@ export interface ITenant {
 
 export interface IDevice{
     device_id: number;
-    mac_address: string;
-    ip: string;
-    default_name: string;
+    mac_address?: string;
+    ip?: string;
+    default_name?: string;
     current_name?: string;
-    is_static: boolean;
-    is_drone: boolean;
+    is_static?: boolean;
+    is_drone?: boolean;
     created_at?: any;
     updated_at?: any;
 }

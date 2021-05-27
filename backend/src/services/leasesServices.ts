@@ -45,7 +45,7 @@ export default class LeasesServices {
                 //this.CheckMacDevices(leases[i])
             }
         }
-        return {"data": leases, "state": "success"};
+        return { "data": leases, "state": "success" };
     }
 
     async RawDataToArrayLeases(raw: any) {
@@ -63,9 +63,18 @@ export default class LeasesServices {
     }
 
     async InsertDevice(leases: ILeases) {
-        let temp: IDevice
+        let temp: IDevice;
         temp = { device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host, is_static: leases.isStatic, is_drone: leases.isADrone, ip: leases.ip };
         await deviceStore.create(temp);
+    }
+
+    async UpdateDevice(lease: ILeases) {
+        try {
+            let result = await deviceStore.updateIP(lease.mac, lease.ip);
+            console.log("Device " + lease.host + " has been updated.");
+        } catch(error) {
+            console.log("Device " + lease.host + " couldn't be updated.");
+        }
     }
 
     // async UpdateIpDevice(dev: IDevice, newip: string) {
