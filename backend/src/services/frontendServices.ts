@@ -43,12 +43,12 @@ export default class FrontendServices {
 
 
             let temp: IDevice;
-            let rowdata = await deviceStore.findByMac(data.Mac);
+            let rowdata = await deviceStore.findByMac(data.mac_address);
             temp = { device_id: rowdata[0].device_id, mac_address: rowdata[0].mac_address, default_name: rowdata[0].default_name, current_name: rowdata[0].current_name, ip: rowdata[0].ip, is_drone: rowdata[0].is_drone, is_static: rowdata[0].is_static, created_at: rowdata[0].created_at, updated_at: rowdata[0].updated_at }
-            if (data.Mac == temp.mac_address) {
+            if (data.mac_address == temp.mac_address) {
                 console.log("Dispositivo già presente, Aggiorno l'hostname")
-                await deviceStore.update(data.Mac, data.NewHostName)
-                await this.SendNewRolesAtDnsServerApp(data.Mac, data.NewHostName)
+                await deviceStore.update(data.mac_address, data.current_name)
+                await this.SendNewRolesAtDnsServerApp(data.mac_address, data.current_name)
                 console.log("hostname aggiornato")
             }
             else {
