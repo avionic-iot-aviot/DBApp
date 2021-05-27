@@ -40,7 +40,8 @@ export default class LeasesServices {
                 await frontendServices.SendNewRolesAtDnsServerApp(leases[i].mac, leases[i].host);
                 console.log("Inserted a new device")
             } else {
-                console.log("Device " + leases[i].host + " already exists")
+                console.log("Device " + leases[i].host + " already exists");
+                await this.UpdateDevice(leases[i]);
                 //console.log ( await deviceStore.findByMac(leases[i].mac) )
                 //this.CheckMacDevices(leases[i])
             }
