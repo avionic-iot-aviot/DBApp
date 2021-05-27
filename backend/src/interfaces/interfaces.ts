@@ -11,6 +11,8 @@ export interface ILeases {
     ip: string;
     host: string;
     id: string;
+    isStatic: boolean;
+    isADrone: boolean;
 }
 
 export interface ITenant {
@@ -26,6 +28,8 @@ export interface IDevice{
     mac_address: string;
     default_name: string;
     current_name?: string;
+    is_static: boolean;
+    is_drone: boolean;
     created_at?: any;
     updated_at?: any;
 }

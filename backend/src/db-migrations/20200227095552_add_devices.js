@@ -5,6 +5,9 @@ exports.up = async function (knex) {
       table.string("mac_address").notNullable();
       table.string("default_name").notNullable();
       table.string("current_name");
+      table.string("ip");
+      table.boolean("is_static").defaultTo(false);
+      table.boolean("is_drone").defaultTo(true);
       table.timestamps(true, true);
     })
   ]);
