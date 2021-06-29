@@ -64,4 +64,17 @@ router.post('/configureDevice', async (req, res) => {
     }
 });
 
+router.delete('/:device_id', async (req, res) => {
+    try {
+        if (req.params.device_id) {
+            const delete_result = await deviceStore.delete(req.params.device_id);
+            res.status(HttpStatus.OK).send(delete_result);
+        } else {
+            res.status(HttpStatus.OK).send("Missing device id");
+        }
+    } catch (error) {
+        res.status(HttpStatus.OK).send(error);
+    }
+});
+
 module.exports = router;
