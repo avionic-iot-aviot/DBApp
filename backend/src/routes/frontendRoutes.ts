@@ -31,7 +31,7 @@ function mapForFrontend(data: any[]) {
 }
 
 router.get('/getAllDevices', async (req, res) => {
-    const show_not_active = req.query && req.query.show_not_active === true;
+    const show_not_active = req.query && (req.query.show_not_active as boolean) === true;
     var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length) - 1]
     try {
         //const params = body && body.params ? body.params : null;
