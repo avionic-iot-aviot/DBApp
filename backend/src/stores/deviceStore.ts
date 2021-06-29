@@ -21,7 +21,7 @@ export default class DeviceStore {
     }
 
     updateDevice(lease: ILeases) {
-        return knex('devices').where({ mac_address: lease.mac }).update({ ip: lease.ip, is_drone: lease.isADrone, is_static: lease.isStatic, is_active: true });
+        return knex('devices').where({ mac_address: lease.mac }).update({ ip: lease.ip, is_drone: lease.isADrone, is_static: lease.isStatic, is_active: lease.isActive });
     }
 
     batchDisable(ids: number[]) {
