@@ -21,7 +21,7 @@ export default class DeviceStore {
     }
 
     batchDisable(ids: number[]) {
-        return knex('devices').whereIn("device_id", ids).update({ is_active: true })
+        return knex('devices').whereIn("device_id", ids).update({ is_active: false })
     }
 
     delete(id: number) {

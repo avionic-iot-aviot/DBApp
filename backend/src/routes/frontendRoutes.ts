@@ -41,9 +41,9 @@ router.get('/getAllDevices', async (req, res) => {
         // frontendService.GetAllElements();
         let rowdata = await deviceStore.getAllElements(show_not_active);
         // res.status(HttpStatus.OK).send(rowdata);
-        const formattedData = mapForFrontend(rowdata);
+        //const formattedData = mapForFrontend(rowdata);
         //console.log("formattedData: ", formattedData);
-        res.status(HttpStatus.OK).send(formattedData);
+        res.status(HttpStatus.OK).send(rowdata);
     } catch (error) {
         res.status(HttpStatus.OK).send(error);
     }
