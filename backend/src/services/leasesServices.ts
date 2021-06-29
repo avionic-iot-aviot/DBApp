@@ -24,11 +24,11 @@ export default class LeasesServices {
         //console.log('Ok Esiste il tenent');
         const leases: ILeases[] = await this.RawDataToArrayLeases(data.leases)
         const leases_mac = _.map(leases, (lease: any) => lease.mac);
-        const all_devices: IDevice[] = await deviceStore.getAllElements();
+        const all_connected_devices: IDevice[] = await deviceStore.getAllElements(false);
 
         // We delete from devices all the devices that don't figure in the leases.
         const ids_to_delete: number[] = _.map(
-            _.filter(all_devices, (device: IDevice) => !_.includes(leases_mac, device.mac_address)), (device: IDevice) => device.device_id as number
+            _.filter(all_connected_devices, (device: IDevice) => !_.includes(leases_mac, device.mac_address)), (device: IDevice) => device.device_id as number
         );
         //const result_delete = await deviceStore.batchDelete(ids_to_delete);
         const result_disable = await deviceStore.batchDisable(ids_to_delete);
