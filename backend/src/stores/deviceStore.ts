@@ -28,7 +28,7 @@ export default class DeviceStore {
         return knex('devices').whereIn("device_id", ids).update({ is_active: false })
     }
 
-    delete(id: number) {
+    delete(id: any) {
         return knex('devices').where({ id }).del();
     }
 
