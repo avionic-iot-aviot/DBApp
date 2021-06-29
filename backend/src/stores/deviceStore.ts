@@ -36,8 +36,11 @@ export default class DeviceStore {
         return knex('devices').select('*').where({ id });
     }
 
-    getAllElements() {
-        return knex('devices').select('*').where({ is_active: true });
+    getAllElements(show_not_active: boolean) {
+        if(show_not_active)
+            return knex('devices').select('*');
+        else
+            return knex('devices').select('*').where({ is_active: true });
     }
 
     findByMac(mac_address: string) {

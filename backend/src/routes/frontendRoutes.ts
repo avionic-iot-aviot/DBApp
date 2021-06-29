@@ -31,7 +31,7 @@ function mapForFrontend(data: any[]) {
 }
 
 router.get('/getAllDevices', async (req, res) => {
-    //const body = req.body;
+    const show_not_active = req.query.show_not_active || false;
     var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length) - 1]
     try {
         //const params = body && body.params ? body.params : null;
@@ -39,7 +39,7 @@ router.get('/getAllDevices', async (req, res) => {
         Utilities.log("frontendRoutes received(" + ip + ") ");
 
         // frontendService.GetAllElements();
-        let rowdata = await deviceStore.getAllElements();
+        let rowdata = await deviceStore.getAllElements(show_not_active);
         // res.status(HttpStatus.OK).send(rowdata);
         const formattedData = mapForFrontend(rowdata);
         //console.log("formattedData: ", formattedData);
