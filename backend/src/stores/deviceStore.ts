@@ -36,8 +36,8 @@ export default class DeviceStore {
         return knex('devices').select('*').where({ id });
     }
 
-    getAllElements(show_not_active: boolean) {
-        if(show_not_active)
+    getAllElements(show_not_active: any) {
+        if(show_not_active == false)
             return knex('devices').select('*');
         else
             return knex('devices').select('*').where({ is_active: true });
