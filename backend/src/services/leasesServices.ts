@@ -72,7 +72,7 @@ export default class LeasesServices {
 
     async UpdateDevice(lease: ILeases) {
         try {
-            let result = await deviceStore.updateIP(lease.mac, lease.ip);
+            let result = await deviceStore.updateDevice(lease);
             console.log("Device " + lease.host + " has been updated.");
         } catch(error) {
             console.log("Device " + lease.host + " couldn't be updated.");

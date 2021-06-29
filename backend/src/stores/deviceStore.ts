@@ -1,4 +1,4 @@
-import { IDevice } from '../interfaces/interfaces';
+import { IDevice, ILeases } from '../interfaces/interfaces';
 const _ = require('lodash');
 // const moment = require('moment');
 var config = require('../../../backend/knexfile');
@@ -18,6 +18,10 @@ export default class DeviceStore {
 
     updateIP(mac_address: string, ip: string) {
         return knex('devices').where({ mac_address }).update({ ip, is_active: true });
+    }
+
+    updateDevice(lease: ILeases) {
+        return knex('devices').where({ mac_address: lease.mac }).update({ ip: lease.ip, is_drone: lease.isADrone, is_static: lease.isStatic, is_active: true });
     }
 
     batchDisable(ids: number[]) {
