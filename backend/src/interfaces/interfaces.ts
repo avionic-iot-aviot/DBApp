@@ -13,6 +13,7 @@ export interface ILeases {
     id: string;
     isStatic: boolean;
     isADrone: boolean;
+    isActive: boolean;
 }
 
 export interface ITenant {
@@ -33,4 +34,5 @@ export interface IDevice{
     is_drone?: boolean;
     created_at?: any;
     updated_at?: any;
+    is_active?: boolean;
 }

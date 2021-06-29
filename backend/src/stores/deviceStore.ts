@@ -17,7 +17,11 @@ export default class DeviceStore {
     }
 
     updateIP(mac_address: string, ip: string) {
-        return knex('devices').where({ mac_address }).update({ ip });
+        return knex('devices').where({ mac_address }).update({ ip, is_active: true });
+    }
+
+    batchDisable(ids: number[]) {
+        return knex('devices').whereIn("device_id", ids).update({ is_active: true })
     }
 
     delete(id: number) {
@@ -33,7 +37,7 @@ export default class DeviceStore {
     }
 
     getAllElements() {
-        return knex('devices').select('*');
+        return knex('devices').select('*').where({ is_active: true });
     }
 
     findByMac(mac_address: string) {

@@ -30,7 +30,8 @@ export default class LeasesServices {
         const ids_to_delete: number[] = _.map(
             _.filter(all_devices, (device: IDevice) => !_.includes(leases_mac, device.mac_address)), (device: IDevice) => device.device_id as number
         );
-        const result_delete = await deviceStore.batchDelete(ids_to_delete);
+        //const result_delete = await deviceStore.batchDelete(ids_to_delete);
+        const result_disable = await deviceStore.batchDisable(ids_to_delete);
 
         for (let i = 0; i < leases.length; i++) {
             if (await this.ExistsDevices(leases[i]) == 0) {
@@ -65,7 +66,7 @@ export default class LeasesServices {
 
     async InsertDevice(leases: ILeases) {
         let temp: IDevice;
-        temp = { device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host, is_static: leases.isStatic, is_drone: leases.isADrone, ip: leases.ip };
+        temp = { device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host, is_static: leases.isStatic, is_drone: leases.isADrone, ip: leases.ip, is_active: leases.isActive };
         await deviceStore.create(temp);
     }
 
