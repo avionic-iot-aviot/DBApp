@@ -28,16 +28,16 @@ export default class DeviceStore {
         return knex('devices').whereIn("device_id", ids).update({ is_active: false })
     }
 
-    delete(id: any) {
-        return knex('devices').where({ id }).del();
+    delete(device_id: any) {
+        return knex('devices').where({ device_id }).del();
     }
 
     batchDelete(ids: number[]) {
         return knex('devices').whereIn("device_id", ids).del();
     }
 
-    findById(id: number): any {
-        return knex('devices').select('*').where({ id });
+    findById(device_id: number): any {
+        return knex('devices').select('*').where({ device_id });
     }
 
     getAllElements(show_not_active: any) {
