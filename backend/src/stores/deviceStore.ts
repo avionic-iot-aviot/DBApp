@@ -16,6 +16,10 @@ export default class DeviceStore {
         return knex('devices').where({ mac_address }).update({ current_name });
     }
 
+    updateCopterId(ip: string, copter_id: string) {
+        return knex('devices').where({ ip }).update({ copter_id });
+    }
+
     updateIP(mac_address: string, ip: string) {
         return knex('devices').where({ mac_address }).update({ ip, is_active: true });
     }
@@ -38,6 +42,10 @@ export default class DeviceStore {
 
     findById(device_id: number): any {
         return knex('devices').select('*').where({ device_id });
+    }
+
+    findByIp(ip: string): any {
+        return knex('devices').select('*').where({ ip });
     }
 
     getAllElements(show_not_active: any) {

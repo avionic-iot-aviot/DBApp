@@ -78,4 +78,15 @@ export default class LeasesServices {
             console.log("Device " + lease.host + " couldn't be updated.");
         }
     }
+
+    async refreshCopterIDs(mac_addresses: any) {
+        for(let mac in mac_addresses) {
+            if(mac_addresses[mac].length > 1) {
+                for(let ip of mac_addresses[mac]){
+                    await deviceStore.updateCopterId(ip, mac);
+                }
+            }
+        }
+        return mac_addresses;
+    }
 }

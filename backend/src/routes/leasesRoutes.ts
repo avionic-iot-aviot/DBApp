@@ -23,4 +23,18 @@ router.post('/refresh', async (req, res) => {
     }
 });
 
+router.post('/refreshCopterIDs', async (req, res) => {
+    const body = req.body;
+    var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length)-1]
+    try {
+        const params = body && body.params ? body.params : null;
+        console.log("refreshCopterIDs received("+ip+"): ","PARAMS", params);
+        Utilities.log("refreshCopterIDs received("+ip+"): " + "PARAMS " + params);
+        const result = await leasesService.refreshCopterIDs(params);
+        res.status(HttpStatus.OK).send(result);
+    } catch (error) {
+        res.status(HttpStatus.OK).send(error);
+    }
+});
+
 module.exports = router;
