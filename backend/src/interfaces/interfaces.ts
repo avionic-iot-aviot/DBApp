@@ -12,7 +12,7 @@ export interface ILeases {
     host: string;
     id: string;
     isStatic: boolean;
-    isADrone: boolean;
+    isADevice: boolean;
     isActive: boolean;
 }
 
@@ -32,6 +32,7 @@ export interface IDevice{
     current_name?: string;
     is_static?: boolean;
     is_drone?: boolean;
+    is_device?: boolean;
     created_at?: any;
     updated_at?: any;
     is_active?: boolean;

@@ -16,36 +16,11 @@ const deviceStore = new DeviceStore();
 
 export default class FrontendServices {
 
-    // async GetAllElements() {
-    //     let rowdata = await deviceStore.getAllElements();
-    //     await this.SendPostAllElements(rowdata);
-    // }
-
-    // async SendPostAllElements(data: any) {
-    //     let request_data = {
-    //         url: `http://${cfg.general.ipFrontend}:5000/frontend/allElements`,
-    //         method: 'POST',
-    //         body: {
-    //             params: {
-    //                 elements: data
-    //             }
-    //         },
-    //         json: true
-    //     };
-    //     await Utilities.request(request_data);
-    //     console.log("DnsService - SendPostResponse: Post send! " + `(http://${cfg.general.ipFrontend}:5000/frontend/allElements)`)
-    // }
-
-
     async NewElements(data: any) {
-
         try {
 
-
-            let temp: IDevice;
             let rowdata = await deviceStore.findByMac(data.mac_address);
-            temp = { device_id: rowdata[0].device_id, mac_address: rowdata[0].mac_address, default_name: rowdata[0].default_name, current_name: rowdata[0].current_name, ip: rowdata[0].ip, is_drone: rowdata[0].is_drone, is_static: rowdata[0].is_static, created_at: rowdata[0].created_at, updated_at: rowdata[0].updated_at }
-            if (data.mac_address == temp.mac_address) {
+            if (rowdata.length > 0) {
                 console.log("Dispositivo già presente, Aggiorno l'hostname")
                 await deviceStore.update(data.mac_address, data.current_name)
                 await this.SendNewRolesAtDnsServerApp(data.mac_address, data.current_name)
@@ -76,7 +51,7 @@ export default class FrontendServices {
             json: true
         };
         await Utilities.request(request_data);
-        await console.log("FrontendServices - SendNewRolesAtDnsServerApp: Post send! " + `(http://${cfg.general.ipDnsServerApp}:${cfg.general.portDnsServerApp}/host/refresh)`)
+        console.log("FrontendServices - SendNewRolesAtDnsServerApp: Post send! " + `(http://${cfg.general.ipDnsServerApp}:${cfg.general.portDnsServerApp}/host/refresh)`)
     }
 
 

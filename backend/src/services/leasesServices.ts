@@ -66,7 +66,7 @@ export default class LeasesServices {
 
     async InsertDevice(leases: ILeases) {
         let temp: IDevice;
-        temp = { device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host, is_static: leases.isStatic, is_drone: leases.isADrone, ip: leases.ip, is_active: leases.isActive };
+        temp = { device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: leases.host, is_static: leases.isStatic, is_device: leases.isADevice, is_drone: leases.isADevice, ip: leases.ip, is_active: leases.isActive };
         await deviceStore.create(temp);
     }
 
@@ -78,30 +78,4 @@ export default class LeasesServices {
             console.log("Device " + lease.host + " couldn't be updated.");
         }
     }
-
-    // async UpdateIpDevice(dev: IDevice, newip: string) {
-    //     let temp: IDevice
-    //     temp={Device_id: 0, Mac: leases.mac, Default_Name: leases.host, Current_Name: "", Created_at: "---", Updated_at: "---"}
-    //     temp={Device_id: 0, Tenant_id: dev.Device_id, Nome: dev.Nome, Ip: newip, Mac: dev.Mac}
-    //     await deviceStore.update(temp)
-    // }
-
-    // async CheckMacDevices(leases: ILeases) {
-
-    //     let temp: IDevice
-    //     let rowdata = await deviceStore.findByMac(leases.mac)
-    //     temp={Device_id: rowdata[0].Device_id, Mac: rowdata[0].Mac, Default_Name: rowdata[0].Default_Name, Current_Name: rowdata[0].Current_Name, Created_at: rowdata[0].Created_at, Updated_at:rowdata[0].Updated_at}
-    //     // temp = { Device_id: rowdata[0].Device_id , Tenant_id: rowdata[0].Tenant_id , Nome: rowdata[0].Nome , Ip: rowdata[0].Ip, Mac: rowdata[0].Mac}
-    //     if (leases. == temp.Ip){
-    //         console.log("Dispositivo già presente, passo oltre")
-    //     }
-    //     else{
-    //         console.log("Il Dispositivo ha un nuovo indirizzo ip, prendo il vecchio hostname e lo metto in quello nuovo")
-    //         await this.UpdateIpDevice(temp,leases.ip)
-    //     }
-    // }
-
-
-
-
 }

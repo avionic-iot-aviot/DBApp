@@ -8,6 +8,7 @@ exports.up = async function (knex) {
       table.string("ip");
       table.boolean("is_static").defaultTo(false);
       table.boolean("is_drone").defaultTo(true);
+      table.boolean("is_device").defaultTo(true);
       table.boolean("is_active").defaultTo(true);
       table.timestamps(true, true);
     })
