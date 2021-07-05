@@ -10,7 +10,7 @@ export interface ILeases {
     mac: string;
     ip: string;
     host: string;
-    id: string;
+    copterID: string;
     isStatic: boolean;
     isADevice: boolean;
     isActive: boolean;
@@ -27,6 +27,7 @@ export interface ITenant {
 export interface IDevice{
     device_id: number;
     mac_address?: string;
+    copter_id?: string;
     ip?: string;
     default_name?: string;
     current_name?: string;

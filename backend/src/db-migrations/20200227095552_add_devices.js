@@ -3,6 +3,7 @@ exports.up = async function (knex) {
     knex.schema.createTable("devices", table => {
       table.increments("device_id").primary();
       table.string("mac_address").notNullable();
+      table.string("copter_id").notNullable();
       table.string("default_name").notNullable();
       table.string("current_name");
       table.string("ip");
