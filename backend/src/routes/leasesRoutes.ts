@@ -9,7 +9,7 @@ import { Utilities } from '../shared/utilities';
 import LeasesService from '../services/leasesServices';
 const leasesService = new LeasesService();
 
-router.post('/refresh', async (req, res) => {
+router.post('/refresh', async (req: Express.Request, res: Express.Response) => {
     const body = req.body;
     var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length)-1]
     try {

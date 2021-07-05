@@ -16,11 +16,13 @@ const deviceStore = new DeviceStore();
 
 export default class FrontendServices {
 
-    async NewElements(data: any) {
+    async renameDevice(data: any) {
         try {
 
             let rowdata = await deviceStore.findByMac(data.mac_address);
             if (rowdata.length > 0) {
+                if(!_.endsWith(data.current_name, `-${data.mac_address.replace(/:/g, "").toLowerCase()}`))
+                    data.current_name = data.mac_address.replace(/:/g, "").toLowerCase();
                 console.log("Dispositivo già presente, Aggiorno l'hostname")
                 await deviceStore.update(data.mac_address, data.current_name)
                 await this.SendNewRolesAtDnsServerApp(data.mac_address, data.current_name)

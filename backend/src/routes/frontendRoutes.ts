@@ -17,20 +17,7 @@ var cors = require('cors');
 router.use(cors());
 router.options('*', cors());
 
-function mapForFrontend(data: any[]) {
-    return _.map(data, (el: any) => {
-        el['Device_id'] = el.device_id;
-        el['Mac'] = el.mac_address;
-        el['Default_Name'] = el.default_name;
-        el['Current_Name'] = el.current_name;
-        el['Created_at'] = el.created_at;
-        el['Updated_at'] = el.updated_at;
-        return el;
-    }
-    );
-}
-
-router.get('/getAllDevices', async (req, res) => {
+router.get('/getAllDevices', async (req: Express.Request, res: Express.Response) => {
     const show_not_active = req.query.show_not_active || undefined;
     var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length) - 1]
     try {
@@ -49,7 +36,7 @@ router.get('/getAllDevices', async (req, res) => {
     }
 });
 
-router.post('/configureDevice', async (req, res) => {
+router.post('/configureDevice', async (req: Express.Request, res: Express.Response) => {
     const body = req.body;
     var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length) - 1]
     try {
@@ -57,14 +44,14 @@ router.post('/configureDevice', async (req, res) => {
         console.log("frontendRoutes received(" + ip + "): ", "PARAMS", params);
         Utilities.log("frontendRoutes received(" + ip + "): " + "PARAMS " + params);
         const result = await delay(1000);
-        frontendService.NewElements(params.device);
+        frontendService.renameDevice(params.device);
         res.status(HttpStatus.OK).send();
     } catch (error) {
         res.status(HttpStatus.OK).send(error);
     }
 });
 
-router.delete('/deleteDevice', async (req, res) => {
+router.delete('/deleteDevice', async (req: Express.Request, res: Express.Response) => {
     try {
         const device_id = req.query.device_id || undefined;
         if (device_id) {
