@@ -17,7 +17,7 @@ var cors = require('cors');
 router.use(cors());
 router.options('*', cors());
 
-router.get('/getAllDevices', async (req: Express.Request, res: Express.Response) => {
+router.get('/getAllDevices', async (req, res) => {
     const show_not_active = req.query.show_not_active || undefined;
     var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length) - 1]
     try {
@@ -36,7 +36,7 @@ router.get('/getAllDevices', async (req: Express.Request, res: Express.Response)
     }
 });
 
-router.post('/configureDevice', async (req: Express.Request, res: Express.Response) => {
+router.post('/configureDevice', async (req, res) => {
     const body = req.body;
     var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length) - 1]
     try {
@@ -51,7 +51,7 @@ router.post('/configureDevice', async (req: Express.Request, res: Express.Respon
     }
 });
 
-router.delete('/deleteDevice', async (req: Express.Request, res: Express.Response) => {
+router.delete('/deleteDevice', async (req, res) => {
     try {
         const device_id = req.query.device_id || undefined;
         if (device_id) {
