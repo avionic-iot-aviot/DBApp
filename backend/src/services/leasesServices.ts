@@ -83,7 +83,11 @@ export default class LeasesServices {
         for(let mac in mac_addresses) {
             if(mac_addresses[mac].length > 1) {
                 for(let ip of mac_addresses[mac]){
-                    await deviceStore.updateCopterId(ip, mac);
+                    try {
+                        await deviceStore.updateCopterId(ip, `gw_${mac}`);
+                    } catch(error) {
+                        console.log("refreshCopterIDs ERROR", mac, error);
+                    }
                 }
             }
         }
