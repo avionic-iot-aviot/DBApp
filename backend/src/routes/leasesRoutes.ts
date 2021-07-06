@@ -33,6 +33,7 @@ router.post('/refreshCopterIDs', async (req, res) => {
         const result = await leasesService.refreshCopterIDs(params);
         res.status(HttpStatus.OK).send(result);
     } catch (error) {
+        console.log("refreshCopterIDs error:", error);
         res.status(HttpStatus.OK).send(error);
     }
 });

@@ -66,7 +66,7 @@ export default class LeasesServices {
 
     async InsertDevice(leases: ILeases) {
         let temp: IDevice;
-        temp = { device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: !leases.isADevice ? leases.host :`${leases.host}-${leases.mac.replace(/:/g, "").toLowerCase()}`, is_static: leases.isStatic, is_device: leases.isADevice, is_drone: leases.isADevice, ip: leases.ip, is_active: leases.isActive, copter_id: leases.copterID };
+        temp = { device_id: null, mac_address: leases.mac, default_name: leases.host, current_name: !leases.isADevice ? leases.host :`${leases.host}-${leases.mac.replace(/:/g, "").toLowerCase()}`, is_static: leases.isStatic, is_device: leases.isADevice,  is_drone: leases.isADevice, ip: leases.ip, is_active: leases.isActive, copter_id: leases.copterID.replace(/:/g, "").toLowerCase()};
         await deviceStore.create(temp);
     }
 
@@ -84,7 +84,7 @@ export default class LeasesServices {
             if(mac_addresses[mac].length > 1) {
                 for(let ip of mac_addresses[mac]){
                     try {
-                        await deviceStore.updateCopterId(ip, `gw_${mac}`);
+                        await deviceStore.updateCopterId(ip, `gw_${mac.replace(/:/g, "").toLowerCase()}`);
                     } catch(error) {
                         console.log("refreshCopterIDs ERROR", mac, error);
                     }
