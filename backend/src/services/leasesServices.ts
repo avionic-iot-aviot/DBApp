@@ -35,11 +35,15 @@ export default class LeasesServices {
 
         for (let i = 0; i < leases.length; i++) {
             if (await this.ExistsDevices(leases[i]) == 0) {
-                console.log("Device " + leases[i].host + " doesn't exist")
-                const result = await this.InsertDevice(leases[i]);
-                console.log("Create device query: ", result);
-                await frontendServices.SendNewRolesAtDnsServerApp(leases[i].mac, leases[i].host);
-                console.log("Inserted a new device")
+                try{
+                    console.log("Device " + leases[i].host + " doesn't exist")
+                    const result = await this.InsertDevice(leases[i]);
+                    console.log("Create device query: ", result);
+                    await frontendServices.SendNewRolesAtDnsServerApp(leases[i].mac, leases[i].host);
+                    console.log("Inserted a new device")
+                } catch(error) {
+                    console.log("Error InsertDevice: ", error);
+                }
             } else {
                 console.log("Device " + leases[i].host + " already exists");
                 await this.UpdateDevice(leases[i]);

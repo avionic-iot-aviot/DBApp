@@ -2,7 +2,7 @@ exports.up = async function (knex) {
   return Promise.all([
     knex.schema.createTable("devices", table => {
       table.increments("device_id").primary();
-      table.string("mac_address").notNullable();
+      table.string("mac_address").notNullable().unique();
       table.string("copter_id").notNullable();
       table.string("default_name").notNullable();
       table.string("current_name");
