@@ -46,10 +46,12 @@ export default class LeasesServices {
                 }
             } else {
                 console.log("Device " + leases[i].host + " already exists");
-                const device: IDevice = await this.UpdateDevice(leases[i]);
-                //console.log ( await deviceStore.findByMac(leases[i].mac) )
-                if(device) {
-                    await frontendServices.SendNewRolesAtDnsServerApp(device.mac_address, device.current_name);
+                const result = await this.UpdateDevice(leases[i]);
+                if(result) {
+                    const devices: IDevice[] = await deviceStore.findByMac(leases[i].mac);
+                    if(devices.length > 0) {
+                        await frontendServices.SendNewRolesAtDnsServerApp(devices[0].mac_address, devices[0].current_name);
+                    }
                 }
                 //this.CheckMacDevices(leases[i])
             }
