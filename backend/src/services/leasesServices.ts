@@ -46,8 +46,11 @@ export default class LeasesServices {
                 }
             } else {
                 console.log("Device " + leases[i].host + " already exists");
-                await this.UpdateDevice(leases[i]);
+                const device: IDevice = await this.UpdateDevice(leases[i]);
                 //console.log ( await deviceStore.findByMac(leases[i].mac) )
+                if(device) {
+                    await frontendServices.SendNewRolesAtDnsServerApp(device.mac_address, device.current_name);
+                }
                 //this.CheckMacDevices(leases[i])
             }
         }
@@ -78,8 +81,10 @@ export default class LeasesServices {
         try {
             let result = await deviceStore.updateDevice(lease);
             console.log("Device " + lease.host + " has been updated.");
+            return result;
         } catch(error) {
             console.log("Device " + lease.host + " couldn't be updated.");
+            return undefined;
         }
     }
 
